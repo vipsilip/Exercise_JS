@@ -14,6 +14,6 @@ describe('check strong password', () => {
     expect(isStrongPassword('abcdef1!')).toBe(false);
   });
   it('should return true when strong pasword', () => {
-    expect(isStrongPassword('Sup3rC0o!')).toBe(true);
+    expect(isStrongPassword('Sup3rC0o@')).toBe(true);
   });
 });
