@@ -5,6 +5,9 @@ import {
   isPrime,
   isPerfectSquare,
   isPerfectNumber,
+  isSymetricNumber,
+  isDivisibleBy10,
+  hasTwoDigitsWithSum,
 } from './number';
 describe('isIncreasingNumber(n)', () => {
   it('should return false when n is not a number or 0 < n < 1000000', () => {
@@ -133,12 +136,77 @@ describe('isPerfectNumber(n)', () => {
   });
   it('should return false if n is not perfect number', () => {
     expect(isPerfectNumber(3)).toBe(false);
-    expect(isPerfectNumber(1)).toBe(false);
-    expect(isPerfectNumber(6)).toBe(false);
+    expect(isPerfectNumber(55)).toBe(false);
+    expect(isPerfectNumber(10)).toBe(false);
   });
   it('should return correct if n is perfect number', () => {
     expect(isPerfectNumber(6)).toBe(true);
     expect(isPerfectNumber(28)).toBe(true);
     expect(isPerfectNumber(496)).toBe(true);
+  });
+});
+describe('isSymetricNumber(n)', () => {
+  it('should return false if n not a number and 1 < n < 1000000', () => {
+    expect(isSymetricNumber()).toBe(false);
+    expect(isSymetricNumber({})).toBe(false);
+    expect(isSymetricNumber([])).toBe(false);
+    expect(isSymetricNumber('123')).toBe(false);
+    expect(isSymetricNumber(1)).toBe(false);
+    expect(isSymetricNumber(1000000)).toBe(false);
+  });
+  it('should return false if n is not symetric number', () => {
+    expect(isSymetricNumber(57168)).toBe(false);
+    expect(isSymetricNumber(123)).toBe(false);
+    expect(isSymetricNumber(10)).toBe(false);
+  });
+  it('should return correct if n is symetric number', () => {
+    expect(isSymetricNumber(11)).toBe(true);
+    expect(isSymetricNumber(12321)).toBe(true);
+    expect(isSymetricNumber(131)).toBe(true);
+  });
+});
+describe('isDivisibleBy10(n)', () => {
+  it('should return false if n not a number and 1 < n < 1000000', () => {
+    expect(isDivisibleBy10()).toBe(false);
+    expect(isDivisibleBy10({})).toBe(false);
+    expect(isDivisibleBy10([])).toBe(false);
+    expect(isDivisibleBy10('123')).toBe(false);
+    expect(isDivisibleBy10(1)).toBe(false);
+    expect(isDivisibleBy10(1000000)).toBe(false);
+  });
+  it('should return false if n is total number not divisible 10', () => {
+    expect(isDivisibleBy10(54321)).toBe(false);
+    expect(isDivisibleBy10(123)).toBe(false);
+    expect(isDivisibleBy10(10)).toBe(false);
+  });
+  it('should return correct if n is total number divisible 10', () => {
+    expect(isDivisibleBy10(1234)).toBe(true);
+    expect(isDivisibleBy10(123455)).toBe(true);
+  });
+});
+describe('hasTwoDigitsWithSum(n,sum)', () => {
+  it('should return false if n not a number and 9 < n < 1000000', () => {
+    expect(hasTwoDigitsWithSum()).toBe(false);
+    expect(hasTwoDigitsWithSum({})).toBe(false);
+    expect(hasTwoDigitsWithSum([])).toBe(false);
+    expect(hasTwoDigitsWithSum('123')).toBe(false);
+    expect(hasTwoDigitsWithSum(1)).toBe(false);
+    expect(hasTwoDigitsWithSum(1000000)).toBe(false);
+  });
+  it('should return false if sum not a number or 0 < sum < 19', () => {
+    expect(hasTwoDigitsWithSum(0)).toBe(false);
+    expect(hasTwoDigitsWithSum(19)).toBe(false);
+    expect(hasTwoDigitsWithSum([])).toBe(false);
+  });
+  it('should return false if total n not equal 2 numbers', () => {
+    expect(hasTwoDigitsWithSum(101, 3)).toBe(false);
+    expect(hasTwoDigitsWithSum(123, 6)).toBe(false);
+    expect(hasTwoDigitsWithSum(10, 2)).toBe(false);
+  });
+  it('should return correct if total n to 2 numbers', () => {
+    expect(hasTwoDigitsWithSum(10, 1)).toBe(true);
+    expect(hasTwoDigitsWithSum(11, 2)).toBe(true);
+    expect(hasTwoDigitsWithSum(123, 5)).toBe(true);
+    expect(hasTwoDigitsWithSum(1562, 11)).toBe(true);
   });
 });
