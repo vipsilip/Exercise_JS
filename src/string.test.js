@@ -5,6 +5,7 @@ import {
   countEmails,
   countURLs,
   getDisplayedAddress,
+  fillPath,
 } from './string';
 describe('countWords(str)', () => {
   it('should return 0 when input not is string', () => {
@@ -85,11 +86,11 @@ describe('getDisplayedAddress(address)', () => {
   it('should return correct when valid input', () => {
     expect(
       getDisplayedAddress({
-        city: 'HCMC',
         number: 123,
         street: 'Nguyen Cong Tru',
         ward: 'Ward 11',
         district: 'Binh Thanh District',
+        city: 'HCMC',
       })
     ).toBe('123 Nguyen Cong Tru, Ward 11, Binh Thanh District, HCMC');
     expect(
@@ -98,5 +99,26 @@ describe('getDisplayedAddress(address)', () => {
         district: 'Binh Thanh District',
       })
     ).toBe('Nguyen Cong Tru, Binh Thanh District');
+  });
+});
+describe('fillPath(path,params)', () => {
+  it('should return empty string when path not is string', () => {
+    expect(fillPath({}, {})).toBe('');
+    expect(fillPath([], [])).toBe('');
+    expect(fillPath()).toBe('');
+    expect(fillPath(123, 123)).toBe('');
+  });
+
+  it('should return correct when valid input', () => {
+    expect(fillPath('/products/:productId', { productId: 123 })).toBe('/products/123');
+    expect(
+      fillPath('/categories/:categoryId/products/:productId', {
+        categoryId: 1,
+        productId: 2,
+      })
+    ).toBe('/categories/1/products/2');
+    expect(fillPath('/categories/:categoryId/products/:productId', { productId: 2 })).toBe(
+      '/categories/:categoryId/products/2'
+    );
   });
 });

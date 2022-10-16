@@ -57,9 +57,21 @@ export function countURLs(str) {
 // string-06
 export function getDisplayedAddress(address) {
   if (typeof address !== 'object' || Object.keys(address).length === 0) return '';
-  const KQ = Object.keys(address).reduce((result, info) => {
-    result = info === 'number' ? result + address[info] + ' ' : result + address[info] + ', ';
-    return result;
+  const info = ['number', 'street', 'ward', 'district', 'city'];
+  const result = info.reduce((string, key) => {
+    if (address[key] !== undefined) {
+      key === 'number' ? (string += `${address[key]} `) : (string += `${address[key]}, `);
+    }
+    return string;
   }, '');
-  return KQ.slice(0, -2);
+  return result.slice(0, -2);
+}
+// string-07
+export function fillPath(path, params) {
+  if (typeof params !== 'object' || Object.keys(params).length === 0) return '';
+  if (typeof path !== 'string' || path.length === 0) return '';
+  for (let key in params) {
+    path = path.replace(`:${key}`, params[key]);
+  }
+  return path;
 }
