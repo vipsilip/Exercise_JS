@@ -210,3 +210,4 @@ describe('hasTwoDigitsWithSum(n,sum)', () => {
     expect(hasTwoDigitsWithSum(1562, 11)).toBe(true);
   });
 });
+// -------------------------------------------END-------------------------------------------
