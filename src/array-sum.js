@@ -2,6 +2,7 @@
 export function sumEvenNumbers(numberList) {
   if (!Array.isArray(numberList) || numberList.length === 0) return 0;
   const filterList = numberList.filter((x) => x % 2 === 0);
+  if (filterList[1] < filterList[0] || filterList.length === 1) return 0;
   let sum = filterList[0];
   for (let i = 0; i < filterList.length; i++) {
     const currentNum = filterList[i];
@@ -10,8 +11,6 @@ export function sumEvenNumbers(numberList) {
   }
   return sum;
 }
-console.log(sumEvenNumbers([2, 8, 5, 4]));
-console.log(sumEvenNumbers([-10, -4, 2, 8, 5]));
 // array-sum-02
 export function sumAllDigits(numberList) {
   if (!Array.isArray(numberList) || numberList.length === 0) return 0;
