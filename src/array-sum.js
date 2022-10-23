@@ -10,6 +10,14 @@ export function sumEvenNumbers(numberList) {
     if (nextNum > currentNum) sum += nextNum;
   }
   return sum;
+  // --------cach 2--------
+  // let sum = 0;
+  // for (let i = 0; i < filterList.length; i++) {
+  //   const currentNum = filterList[i];
+  //   const nextNum = filterList[i + 1];
+  //   if (nextNum > currentNum) sum += nextNum;
+  // }
+  // return sum;
 }
 // array-sum-02
 export function sumAllDigits(numberList) {
