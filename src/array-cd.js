@@ -31,6 +31,11 @@ export function removeStudentById(studentList, studentId) {
   }
   return [...studentList];
 }
+const studentList = [
+  { id: 1, name: 'Alice' },
+  { id: 2, name: 'Bob' },
+];
+console.log(removeStudentById(studentList, 2));
 // array-cd-04
 export function insert2(numberList, newNumber) {
   if (!Array.isArray(numberList) || (numberList.length === 0 && newNumber === undefined)) return [];

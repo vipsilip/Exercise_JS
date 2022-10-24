@@ -49,10 +49,7 @@ describe('removeStudentById(studentList, studentId)', () => {
   ];
   it('nen return dung khi input dung', () => {
     expect(removeStudentById(studentList, 1)).toEqual([{ id: 2, name: 'Bob' }]);
-    expect(removeStudentById(studentList, 3)).toEqual([
-      { id: 1, name: 'Alice' },
-      { id: 2, name: 'Bob' },
-    ]);
+    expect(removeStudentById(studentList, 3)).toEqual(studentList);
   });
 });
 describe('insert2(numberList, newNumber)', () => {
