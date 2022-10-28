@@ -1,39 +1,59 @@
 //Number-01
+// cach 1
+// 123
 export function isIncreasingNumber(n) {
   if (typeof n !== 'number' || n >= 1000000 || n < 10) return false;
-  const nToStr = n.toString();
-  if (nToStr[1] <= nToStr[0]) return false;
-  let result = false;
-  for (let i = 0; i < nToStr.length - 1; i++) {
-    if (nToStr[i] > nToStr[i + 1]) return false;
-    else result = true;
+  let remaining = n;
+  let lastDigit = 10;
+  while (remaining > 0) {
+    const prevDigit = remaining % 10;
+    if (prevDigit >= lastDigit) return false;
+    lastDigit = prevDigit;
+    remaining = Math.trunc(remaining / 10);
   }
-  return result;
+  return true;
 }
+// cach 2
+// export function isIncreasingNumber(n) {
+//   if (typeof n !== 'number' || n >= 1000000 || n < 10) return false;
+//   const nToStr = n.toString();
+//   for (let i = 0; i < nToStr.length - 1; i++) {
+//     if (nToStr[i] >= nToStr[i + 1]) return false;
+//   }
+//   return true;
+// }
 //Number-02
+// 321
 export function isDecreasingNumber(n) {
   if (typeof n !== 'number' || n >= 1000000 || n < 10) return false;
-  const nToStr = n.toString();
-  if (nToStr[1] >= nToStr[0]) return false;
-  let result = false;
-  for (let i = 0; i < nToStr.length - 1; i++) {
-    if (nToStr[i] < nToStr[i + 1]) return false;
-    else result = true;
+  let remaining = n;
+  let lastDigit = -1;
+  while (remaining > 0) {
+    const prevDigit = remaining % 10;
+    if (lastDigit >= prevDigit) return false;
+    lastDigit = prevDigit;
+    remaining = Math.trunc(remaining / 10);
   }
-  return result;
+  return true;
 }
+
+// export function isDecreasingNumber(n) {
+//   if (typeof n !== 'number' || n >= 1000000 || n < 10) return false;
+//   const nToStr = n.toString();
+//   for (let i = 0; i < nToStr.length - 1; i++) {
+//     if (nToStr[i] <= nToStr[i + 1]) return false;
+//   }
+//   return true;
+// }
 // Number-03
 export function isIncreasingNumberByDistance(n, x) {
   if (typeof n !== 'number' || typeof x !== 'number' || n < 10 || n >= 1000000 || x <= 0 || x >= 5)
     return false;
   const nToStr = n.toString();
-  let result = false;
-  if (nToStr[1] <= nToStr[0]) return false;
   for (let i = 0; i < nToStr.length - 1; i++) {
-    if (nToStr[i] > nToStr[i + 1] || nToStr[i + 1] - nToStr[i] !== x) return false;
-    else result = true;
+    if (nToStr[i] >= nToStr[i + 1] || nToStr[i + 1] - nToStr[i] !== x) return false;
   }
-  return result;
+  return true;
 }
 // Number-04
 export function isPrime(n) {

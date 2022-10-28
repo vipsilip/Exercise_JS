@@ -1,3 +1,5 @@
+// tao list tu A den Z
+console.log(Array.from({ length: 26 }, (v, i) => String.fromCharCode('A'.charCodeAt(0) + i)));
 export function isStrongPassword(password) {
   if (password.length === 0 || typeof password !== 'string') return false;
   if (password.length < 8) return false;

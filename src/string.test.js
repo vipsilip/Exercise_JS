@@ -26,7 +26,10 @@ describe('statisticsWords(str)', () => {
     expect(statisticsWords()).toEqual({});
     expect(statisticsWords(123)).toEqual({});
   });
-  it('should return correct when input is string', () => {
+  it('should return correct when string has many redundant space', () => {
+    expect(statisticsWords('   easy    frontend   ')).toEqual({ easy: 1, frontend: 1 });
+  });
+  it('should return correct when string no does redundant space', () => {
     expect(statisticsWords('easy frontend')).toEqual({ easy: 1, frontend: 1 });
     expect(statisticsWords('easy frontend easy')).toEqual({ easy: 2, frontend: 1 });
   });

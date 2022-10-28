@@ -26,14 +26,23 @@ export function countWords(wordList, n) {
   return count;
 }
 // array-count-04
+// export function countUniqueNumbers(numberList) {
+//   if (!Array.isArray(numberList) || numberList.length === 0) return 0;
+//   const obj = {};
+//   for (let i = 0; i < numberList.length; i++) {
+//     const number = numberList[i];
+//     obj[number] = true;
+//   }
+//   return Object.keys(obj).length;
+// }
 export function countUniqueNumbers(numberList) {
   if (!Array.isArray(numberList) || numberList.length === 0) return 0;
-  const obj = {};
+  const result = [];
   for (let i = 0; i < numberList.length; i++) {
     const number = numberList[i];
-    obj[number] = obj[number] !== undefined ? 1 : obj[number] + 1;
+    if (!result.includes(number)) result.push(number);
   }
-  return Object.keys(obj).length;
+  return result.length;
 }
 // array-count-05
 export function countNumbersNotInB(a, b) {

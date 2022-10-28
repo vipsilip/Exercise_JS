@@ -19,19 +19,28 @@ describe('isIncreasingNumber(n)', () => {
     expect(isIncreasingNumber(1000000)).toBe(false);
   });
   it('should return false when n is one digit', () => {
-    expect(isIncreasingNumber(1)).toBe(false);
-    expect(isIncreasingNumber(5)).toBe(false);
-    expect(isIncreasingNumber(9)).toBe(false);
-    expect(isIncreasingNumber(3)).toBe(false);
+    // expect(isIncreasingNumber(1)).toBe(false);
+    // expect(isIncreasingNumber(5)).toBe(false);
+    // expect(isIncreasingNumber(9)).toBe(false);
+    // expect(isIncreasingNumber(3)).toBe(false);
+    Array.from({ length: 10 }, (x, i) => i).forEach((x) => {
+      expect(isIncreasingNumber(x)).toBe(false);
+    });
   });
   it('should return false when n is not an increasing number', () => {
-    expect(isIncreasingNumber(11)).toBe(false);
-    expect(isIncreasingNumber(12321)).toBe(false);
+    // expect(isIncreasingNumber(11)).toBe(false);
+    // expect(isIncreasingNumber(12321)).toBe(false);
+    [11, 121, 12321, 32].forEach((x) => {
+      expect(isIncreasingNumber(x)).toBe(false);
+    });
   });
   it('should return correct when n is an increasing number', () => {
-    expect(isIncreasingNumber(123)).toBe(true);
-    expect(isIncreasingNumber(678)).toBe(true);
-    expect(isIncreasingNumber(12345)).toBe(true);
+    // expect(isIncreasingNumber(123)).toBe(true);
+    // expect(isIncreasingNumber(678)).toBe(true);
+    // expect(isIncreasingNumber(12345)).toBe(true);
+    [12, 678, 4567, 24689].forEach((x) => {
+      expect(isIncreasingNumber(x)).toBe(true);
+    });
   });
 });
 describe('isDecreasingNumber(n)', () => {

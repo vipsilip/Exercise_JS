@@ -6,12 +6,21 @@ export function countWords(str) {
 // string-02
 export function statisticsWords(str) {
   if (typeof str !== 'string' || str.length === 0) return {};
-  const obj = {};
-  const strToArr = str.split(' ');
-  for (let i = 0; i < strToArr.length; i++) {
-    obj[strToArr[i]] = obj[strToArr[i]] === undefined ? 1 : obj[strToArr[i]] + 1;
-  }
-  return obj;
+  // const obj = {};
+  // str
+  //   .split(' ')
+  //   .filter((x) => x !== '')
+  //   .forEach((word) => {
+  //     obj[word] = obj[word] === undefined ? 1 : obj[word] + 1;
+  //   });
+  // return obj;
+  return str
+    .split(' ')
+    .filter((x) => x !== '')
+    .reduce((obj, word) => {
+      obj[word] = obj[word] === undefined ? 1 : obj[word] + 1;
+      return obj;
+    }, {});
 }
 // string-03
 export function statisticsCharacters(str) {
