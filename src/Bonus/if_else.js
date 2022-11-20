@@ -295,13 +295,13 @@ bai27(4);
 function bai28(h) {
   for (i = 1; i <= h; i++) {
     for (j = 0; j < h - i; j++) {
-      process.stdout.write('- ');
+      process.stdout.write('  ');
     }
     for (j = 1; j <= 2 * i - 1; j++) {
       if (i === 1 || i === h) process.stdout.write('* ');
       else {
-        if (j === 1 || j <= 2 * i - 1) process.stdout.write('* ');
-        else process.stdout.write('- ');
+        if (j === 1 || j >= 2 * i - 1) process.stdout.write('* ');
+        else process.stdout.write('  ');
       }
     }
     process.stdout.write('\n');
