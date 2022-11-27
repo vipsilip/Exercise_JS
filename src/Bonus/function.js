@@ -401,8 +401,24 @@ console.log(bai24(4321));
 console.log(bai24(4312));
 
 function bai25(a, b) {
-  do {
-    console.log('nhap lai vi khong dung yeu cau');
-  } while (Math.max(a, b) <= 0 && Math.max(a, b) % 7 === 1);
+  if (Math.max(a, b) < 0 || Math.max(a, b) % 7 !== 0) console.log('nhap lai');
+  else console.log('dung yeu cau');
 }
 bai25(2, 7);
+
+function bai26(n) {
+  if (n < 0 || n > 100000) return false;
+  let sum = 0;
+  let count = 0;
+  while (n !== 0) {
+    const digit = n % 10;
+    if (digit % 2 === 0) {
+      sum += digit;
+      count++;
+    }
+    n = Math.trunc(n / 10);
+  }
+  return sum / count;
+}
+console.log(bai26(24688));
+console.log(bai26(12584));
