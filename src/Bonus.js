@@ -24,4 +24,4 @@ function createArrayRandom(n) {
   }
   console.log(result);
 }
-console.log(createArrayRandom(5));
+console.log(createArrayRandom(1));

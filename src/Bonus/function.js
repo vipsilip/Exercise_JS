@@ -279,5 +279,130 @@ console.log(bai16(1));
 
 function bai17(n) {
   if (n < 0 || n > 100000) return -1;
-  let count = 0;
+  let countOdd = 0;
+  let countEven = 0;
+  while (n !== 0) {
+    (n % 10) % 2 === 0 ? countEven++ : countOdd++;
+    n = Math.trunc(n / 10);
+  }
+  return `co ${countEven} so chan, co ${countOdd} so le`;
 }
+console.log(bai17(973));
+
+function isPrime(n) {
+  for (let i = 2; i <= Math.sqrt(n); i++) {
+    if (n % i === 0) return false;
+  }
+  return true;
+}
+function bai18(n) {
+  if (n < 0 || n > 100000) return -1;
+  let countPrime = 0;
+  while (n !== 0) {
+    if (isPrime(n % 10)) countPrime++;
+    n = Math.trunc(n / 10);
+  }
+  return `co ${countPrime} so nguyen to`;
+}
+console.log(bai18(9865));
+
+function bai19(n) {
+  if (n < 0 || n > 100000) return -1;
+  let sum = 0;
+  for (let i = 1; i <= n; i++) {
+    if (n % i === 0) sum += i;
+  }
+  return sum;
+}
+console.log(bai19(12));
+
+function bai20(n) {
+  if (n < 0 || n > 100000) return -1;
+  let maxDivisor;
+  for (let i = 1; i <= n; i++) {
+    if (n % i === 0 && i % 2 === 1) maxDivisor = i;
+  }
+  return maxDivisor;
+}
+console.log(bai20(90));
+
+function bai21(n) {
+  if (n < 0 || n > 100000) return false;
+  let count = 0,
+    countOdd = 0,
+    countEven = 0;
+  while (n !== 0) {
+    if ((n % 10) % 2 === 0) {
+      countEven++;
+      count++;
+    }
+    if ((n % 10) % 2 === 1) {
+      countOdd++;
+      count++;
+    }
+    n = Math.trunc(n / 10);
+  }
+  return count === countEven || count === countOdd ? true : false;
+}
+console.log(bai21(11221));
+console.log(bai21(111));
+console.log(bai21(13579));
+console.log(bai21(86420));
+
+function bai23(n, x) {
+  if (n < 0 || n > 100000) return -1;
+  let count = 0;
+  let curr = n;
+  while (curr !== 0) {
+    curr = Math.trunc(curr / 10);
+    count++;
+  }
+  while (count > 0) {
+    const position = n % 10;
+    if (position === x) return `chu so ${x} o vi tri thu ${count}`;
+    n = Math.trunc(n / 10);
+    count--;
+  }
+  return -1;
+}
+console.log(bai23(12345, 5));
+console.log(bai23(12345, 4));
+console.log(bai23(12345, 3));
+console.log(bai23(12345, 2));
+console.log(bai23(12345, 1));
+console.log(bai23(98364, 9));
+
+function bai24(n) {
+  if (n < 0 || n > 100000) return false;
+  let remaining = n;
+  let lastDigit = remaining % 10;
+  let flag = 0;
+  let count = 0;
+  while (remaining !== 0) {
+    const digit = Math.trunc(remaining / 10) % 10;
+    if (digit < lastDigit) {
+      lastDigit = digit;
+      flag += 1;
+    } else {
+      lastDigit = digit;
+      flag += 0;
+    }
+    count++;
+    remaining = Math.trunc(remaining / 10);
+  }
+  return flag === count || flag === 1 ? true : false;
+}
+console.log(bai24(8521));
+console.log(bai24(1569));
+console.log(bai24(879));
+console.log(bai24(1298));
+console.log(bai24(1234));
+console.log(bai24(4321));
+console.log(bai24(4312));
+
+function bai25(a, b) {
+  do {
+    console.log('nhap lai vi khong dung yeu cau');
+  } while (Math.max(a, b) <= 0 && Math.max(a, b) % 7 === 1);
+}
+bai25(2, 7);
