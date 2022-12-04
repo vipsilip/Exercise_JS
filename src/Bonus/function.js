@@ -422,3 +422,22 @@ function bai26(n) {
 }
 console.log(bai26(24688));
 console.log(bai26(12584));
+
+function delNearX(arrayList, x) {
+  let compair = Math.abs(x - arrayList[0]);
+  let length = arrayList.length;
+  for (let i = 1; i < length; i++) {
+    if (compair > Math.abs(x - arrayList[i])) compair = Math.abs(x - arrayList[i]);
+  }
+  for (let i = length - 1; i > 0; i--) {
+    if (compair === Math.abs(x - arrayList[i])) {
+      for (let j = i; j < length; j++) {
+        if (arrayList[j + 1] === undefined) arrayList.pop();
+        else arrayList[j] = arrayList[j + 1];
+      }
+      length--;
+    }
+  }
+  return arrayList;
+}
+console.log(delNearX([2, 3, 6, 8, 7, 9], 5));

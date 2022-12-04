@@ -594,27 +594,42 @@ function bai59(arrayListA, arrayListB) {
   // })
   const lengthA = arrayListA.length;
   const lengthB = arrayListB.length;
-  const lengthC = arrayListC.length;
   let i = 0,
     j = 0,
-    k = 0;
-  while (i < lengthA && j < lengthB) {
-    if (arrayListA[i] % 2 === 1) arrayListC[k++] = arrayListA[i++];
-    else {
-      for (let m = lengthC - 1; m >= 0; m--) {
-        if (m >= 0) arrayListC[m + 1] = arrayListC[m];
-        else arrayListC[0] = arrayListA[i++];
-      }
-    }
-    if (arrayListB[j] % 2 === 1) arrayListC[k++] = arrayListB[j++];
-    else {
-      for (let m = lengthC - 1; m >= 0; m--) {
-        if (m >= 0) {
-          arrayListC[m + 1] = arrayListC[m];
-        } else arrayListC[0] = arrayListB[j++];
-      }
-    }
+    k = lengthA + lengthB - 1;
+  for (let i = 0; i < Math.max(lengthA, lengthB); i++) {
+    if (arrayListA[i] % 2 === 0 && i < lengthA) arrayListC[j++] = arrayListA[i];
+    if (arrayListB[i] % 2 === 0 && i < lengthB) arrayListC[j++] = arrayListB[i];
+    if (arrayListA[i] % 2 === 1 && i < lengthA) arrayListC[k--] = arrayListA[i];
+    if (arrayListB[i] % 2 === 1 && i < lengthB) arrayListC[k--] = arrayListB[i];
   }
   return arrayListC;
 }
 console.log(bai59([3, 2, 7, 5, 9], [1, 8, 10, 4, 12, 6]));
+console.log(bai59([3, 2, 7, 5, 9, 0], [1, 8, 10, 4, 12, 6]));
+
+function bai60(arrayList) {
+  const temp = [];
+  let flag = true;
+  arrayList.forEach((x) => {
+    temp.includes(x) ? (flag = false) : temp.push(x);
+  });
+  return flag;
+}
+console.log(bai60([1, 2, 3, 4, 5, 6, 7]));
+
+function bai61(arrayList) {
+  let sum = 0;
+  for (let i = 0; i < arrayList.length; i++) {
+    sum += arrayList[i];
+    if (arrayList[i] <= arrayList[i + 1] || i === arrayList.length - 1) {
+      console.log(sum);
+      sum = 0;
+    }
+  }
+  // return result;
+}
+console.log(bai61([9, 1, 3, 2, 1, 7, 5, 3]));
+
+function bai61(arrayList) {}
+console.log(bai61([9, 1, 3, 2, 1, 7, 5, 3]));
