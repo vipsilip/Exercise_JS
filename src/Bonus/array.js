@@ -620,16 +620,199 @@ console.log(bai60([1, 2, 3, 4, 5, 6, 7]));
 
 function bai61(arrayList) {
   let sum = 0;
+  let subArr = [];
   for (let i = 0; i < arrayList.length; i++) {
     sum += arrayList[i];
+    subArr.push(arrayList[i]);
     if (arrayList[i] <= arrayList[i + 1] || i === arrayList.length - 1) {
-      console.log(sum);
+      if (subArr.length > 1) {
+        console.log(subArr);
+        console.log(sum);
+      }
+      subArr = [];
       sum = 0;
     }
   }
   // return result;
 }
-console.log(bai61([9, 1, 3, 2, 1, 7, 5, 3]));
+console.log(bai61([1, 3, 2, 1, 7, 5, 3]));
 
-function bai61(arrayList) {}
-console.log(bai61([9, 1, 3, 2, 1, 7, 5, 3]));
+function bai62(arrayList, k) {
+  if (
+    arrayList.length === 0 ||
+    arrayList.length > 30000 ||
+    k > arrayList.length ||
+    !Array.isArray(arrayList)
+  )
+    return -1;
+  // return arrayList.sort((a,b)=>b-a)[k-1]
+  let temp;
+  for (let i = 0; i < arrayList.length; i++) {
+    for (let j = i + 1; j < arrayList.length; j++) {
+      if (arrayList[j] > arrayList[i]) {
+        temp = arrayList[j];
+        arrayList[j] = arrayList[i];
+        arrayList[i] = temp;
+      }
+    }
+  }
+  return arrayList[k - 1];
+}
+console.log(bai62([11, 3, 1, 10, 6, 18], 2));
+console.log(bai62([1, 3, 5, 10, 11, 18, 4, 99, 56, 43], 2));
+
+function bai63(arrayListA, arrayListB) {
+  if (arrayListA.length > arrayListB.length || arrayListA.length === 0 || arrayListB.length === 0)
+    return false;
+  if (arrayListA.length === 0 && arrayListB.length !== 0) return true;
+  let index = 0;
+  for (let j = 0; j < arrayListB.length; j++) {
+    if (arrayListA[0] === arrayListB[j]) {
+      index = j;
+      for (let i = 0; i < arrayListA.length; i++) {
+        if (arrayListA[i] !== arrayListB[index++]) return false;
+      }
+    }
+  }
+  return true;
+}
+console.log(bai63([3, 2, 4, 5], [1, 3, 2, 4, 5, 6]));
+
+function bai64(arrayList) {
+  let subArr = [];
+  for (let i = 0; i < arrayList.length; i++) {
+    for (let j = i + 1; j < arrayList.length; j++) {
+      if (arrayList[i] + arrayList[j] === arrayList[j + 1] + arrayList[j + 2]) {
+        subArr.push(arrayList[i], arrayList[j], arrayList[j + 1], arrayList[j + 2]);
+        if (subArr.length === 4) {
+          console.log(subArr);
+          subArr = [];
+        }
+      }
+    }
+  }
+}
+
+console.log(bai64([5, 6, 10, 1, 2, 3, 4, 1, 10]));
+
+function bai65(arrayList) {
+  let sum = 0;
+  let total = 0;
+  let count = 0;
+  for (let i = 0; i < arrayList.length; i++) {
+    sum += arrayList[i];
+    if (arrayList[i] > arrayList[i + 1] || i === arrayList.length - 1) {
+      total += sum;
+      sum = 0;
+      count++;
+    }
+  }
+  return total / count;
+}
+console.log(bai65([1, 2, 3, 4, 2, 3, 6, 5, 6, 4, 5, 6]));
+
+function bai66(arrayList) {
+  let sum = 0;
+  for (let i = 1; i < arrayList.length; i++) {
+    if (arrayList[i - 1] + arrayList[i + 1] === arrayList[i]) {
+      sum += arrayList[i];
+    }
+  }
+  return sum;
+}
+console.log(bai66([1, 3, 2, 6, 3, 9, 6]));
+
+function isArmstrong(n) {
+  let sum = 0;
+  let k = 0;
+  let remaining1 = n;
+  let remaining2 = n;
+  let number;
+  while (remaining1 !== 0) {
+    number = remaining1 % 10;
+    remaining1 = Math.trunc(remaining1 / 10);
+    k++;
+  }
+  while (remaining2 !== 0) {
+    number = Math.pow(remaining2 % 10, k);
+    sum += number;
+    remaining2 = Math.trunc(remaining2 / 10);
+  }
+  return sum === n ? true : false;
+}
+function bai68(n) {
+  let sum = 0;
+  if (isArmstrong(n)) {
+    while (n !== 0) {
+      sum += n % 10;
+      n = Math.trunc(n / 10);
+    }
+  }
+  return sum;
+}
+console.log(bai68(153));
+console.log(bai68(123));
+
+// function bai69(arrayList, x) {
+//   let index;
+//   for (let i in arrayList) {
+//     if (arrayList[i] === x) {
+//       index = i;
+//       arrayList.splice(index, 1);
+//     }
+// else return -1
+//   }
+//   return arrayList;
+// }
+function bai69(arrayList, x) {
+  for (let i = arrayList.length - 1; i >= 0; i--) {
+    if (arrayList[i] === x) {
+      for (let j = i; j < arrayList.length; j++) {
+        arrayList[j] = arrayList[j + 1];
+      }
+      arrayList.length--;
+    }
+  }
+  return arrayList;
+}
+console.log(bai69([1, 2, 5, 4, 5, 6, 7], 5));
+
+// function bai70(arrayList){
+//   const temp=[];
+//   arrayList.forEach(x=>{
+//     if(!temp.includes(x)) temp.push(x)
+//   })
+//   return temp;
+// ------------------------cach 2
+// return  [...new Set (arrayList)]
+// }
+function bai70(arrayList) {
+  const length = arrayList.length;
+  for (let i = 0; i < arrayList.length; i++) {
+    for (let j = arrayList.length - 1; j > i; j--) {
+      if (arrayList[j] === arrayList[i]) {
+        for (let k = j; k < arrayList.length; k++) {
+          arrayList[k] = arrayList[k + 1];
+        }
+        arrayList.length--;
+      }
+    }
+  }
+  return arrayList;
+}
+console.log(bai70([1, 6, 2, 3, 2, 4, 2, 6, 5]));
+
+function bai71(arrayList) {
+  const length = arrayList.length;
+  for (let i = 1; i < arrayList.length; i++) {
+    if (arrayList[i] < arrayList[i - 1] || arrayList[i] > arrayList[i + 1]) {
+      for (let j = i; j < arrayList.length; j++) {
+        arrayList[j] = arrayList[j + 1];
+      }
+      arrayList.length--;
+    }
+  }
+  return arrayList;
+}
+console.log(bai71([1, 2, 3, 6, 7, 4, 5, 6]));
+console.log(bai71([1, 6, 2, 3, 2, 4, 2, 6, 5]));
