@@ -804,15 +804,282 @@ console.log(bai70([1, 6, 2, 3, 2, 4, 2, 6, 5]));
 
 function bai71(arrayList) {
   const length = arrayList.length;
-  for (let i = 1; i < arrayList.length; i++) {
-    if (arrayList[i] < arrayList[i - 1] || arrayList[i] > arrayList[i + 1]) {
-      for (let j = i; j < arrayList.length; j++) {
-        arrayList[j] = arrayList[j + 1];
-      }
-      arrayList.length--;
+  for (let i = 0; i < arrayList.length; i++) {
+    for (let j = i + 1; j < arrayList.length; j++) {
+      if (arrayList[i] > arrayList[j]) arrayList.splice(i, 1);
+      if (arrayList[i] > arrayList[j] && arrayList[j - 1] > arrayList[j]) arrayList.splice(j, 1);
+      if (arrayList[i] === arrayList[j]) arrayList.splice(j, 1);
     }
   }
   return arrayList;
 }
+console.log(bai71([2, 3, 1, 7, 4, 5, 9, 6, 8])); //[2,3,4,5,6,8]
 console.log(bai71([1, 2, 3, 6, 7, 4, 5, 6]));
-console.log(bai71([1, 6, 2, 3, 2, 4, 2, 6, 5]));
+console.log(bai71([1, 6, 2, 3, 2, 4, 2, 6, 5])); //[1,2,3,4,6]
+
+function bai72(arrayList, x) {
+  const length = arrayList.length;
+  for (let i = 0; i < arrayList.length; i++) {
+    if (arrayList[i] > arrayList[i + 1]) return false;
+    if (x >= arrayList[i] && x < arrayList[i + 1]) {
+      arrayList.splice(i + 1, 0, x);
+      break;
+    }
+    if (x <= arrayList[i] && i === 0) {
+      arrayList.unshift(x);
+      break;
+    }
+    if (x >= arrayList[i] && i === arrayList.length - 1) {
+      arrayList.push(x);
+      break;
+    }
+  }
+  return arrayList;
+}
+
+console.log(bai72([2, 3, 3, 5, 6], 3));
+
+function bai73(arrayList) {
+  const arrOdd = arrayList.filter((x) => x % 2 === 1).sort((a, b) => a - b);
+  const arrEven = arrayList.filter((x) => x % 2 === 0);
+  // return arrOdd.find((x) => arrEven.every((y) => y < x));
+  let maxEven = arrEven[0];
+  for (let i in arrEven) {
+    if (maxEven < arrEven[i]) maxEven = arrEven[i];
+  }
+  for (let i in arrOdd) {
+    if (arrOdd[i] > maxEven) return arrOdd[i];
+  }
+  return -1;
+}
+console.log(bai73([1, 3, 5, 7, 9, 13, 11, 4, 6, 8]));
+console.log(bai73([1, 3, 5, 7, 4, 6, 8]));
+
+function bai74(arrayList) {
+  const arrOdd = arrayList.filter((x) => x % 2 === 1);
+  const arrEven = arrayList.filter((x) => x % 2 === 0).sort((a, b) => a - b);
+  // return arrEven.find((x) => arrOdd.every((y) => y > x));
+  let minOdd = arrOdd[0];
+  for (let i in arrOdd) {
+    if (minOdd > arrOdd[i]) minOdd = arrOdd[i];
+  }
+  for (let i in arrEven) {
+    if (arrEven[i] < minOdd) return arrEven[i];
+  }
+  return -1;
+}
+console.log(bai74([5, 7, 9, 13, 11, 4, 6, 8]));
+console.log(bai74([1, 3, 5, 7, 4, 6, 8]));
+
+// function bai75(arrayList) {
+//   const objCountNumber = {};
+//   for (let i in arrayList) {
+//     objCountNumber[arrayList[i]] =
+//       objCountNumber[arrayList[i]] === undefined ? 1 : objCountNumber[arrayList[i]] + 1;
+//   }
+//   let max = 0;
+//   let result;
+//   for (let key in objCountNumber) {
+//     if (objCountNumber[key] > max) {
+//       max = objCountNumber[key];
+//       result = key;
+//     }
+//   }
+//   return result;
+// }
+function bai75(arrayList) {
+  let max = 0;
+  let count = 1;
+  let temp;
+  let result;
+  for (let i = 0; i < arrayList.length; i++) {
+    for (let j = i + 1; j < arrayList.length; j++) {
+      if (arrayList[i] > arrayList[j]) {
+        temp = arrayList[i];
+        arrayList[i] = arrayList[j];
+        arrayList[j] = temp;
+      }
+    }
+  }
+  for (i = 0; i < arrayList.length; i++) {
+    if (arrayList[i] !== arrayList[i + 1]) {
+      count = 1;
+    } else {
+      count++;
+      if (count > max) {
+        max = count;
+        result = arrayList[i];
+      }
+    }
+  }
+  return result;
+}
+console.log(bai75([1, 1, 1, 3, 4, 2, 2, 5, 6, 6]));
+console.log(bai75([1, 1, 1, 2, 2, 3, 4, 5, 6, 6, 6, 6]));
+
+function bai76(arrayList) {
+  let subArr = [];
+  let index = 0;
+  for (let i = 0; i < arrayList.length; i++) {
+    subArr[index++] = arrayList[i];
+    if (arrayList[i] > arrayList[i + 1] || i === arrayList.length - 1) {
+      if (subArr.length > 1) console.log(subArr);
+      subArr = [];
+      index = 0;
+    }
+  }
+}
+console.log(bai76([6, 5, 3, 2, 3, 4, 2, 7]));
+console.log(bai76([1, 2, 3, 5, 3, 1, 8, 2, 3]));
+
+function bai77(arrayList) {
+  let subArr = [];
+  let index = 0;
+  let sum = 0;
+  let maxSum = 0;
+  let result;
+  for (let i = 0; i < arrayList.length; i++) {
+    subArr[index++] = arrayList[i];
+    sum += arrayList[i];
+    if (maxSum < sum) {
+      maxSum = sum;
+      if (subArr.length > 1) result = subArr;
+    }
+    if (arrayList[i] > arrayList[i + 1] || i === arrayList.length - 1) {
+      subArr = [];
+      index = 0;
+      sum = 0;
+    }
+  }
+  return result;
+}
+console.log(bai77([6, 5, 3, 2, 3, 2, 7]));
+console.log(bai77([1, 2, 3, 5, 3, 1, 8, 9, 2, 3]));
+
+function bai78(arrayList) {
+  let subArr = [];
+  let index = 0;
+  let length = 0;
+  let maxLength = 0;
+  let result;
+  for (let i = 0; i < arrayList.length; i++) {
+    subArr[index++] = arrayList[i];
+    length = subArr.length;
+    if (maxLength < length) {
+      maxLength = length;
+      if (subArr.length > 1) result = subArr;
+    }
+    if (arrayList[i] > arrayList[i + 1] || i === arrayList.length - 1) {
+      subArr = [];
+      index = 0;
+      sum = 0;
+    }
+  }
+  return result;
+}
+console.log(bai78([1, 2, 3, 6, 4, 7, 8, 3, 4, 5, 6, 7, 8, 9, 4, 5]));
+
+function bai79(arrayList) {
+  const arrOdd = [];
+  const arrEven = [];
+  while (arrayList.length !== 0) {
+    if (arrayList[0] % 2 === 1) {
+      let minOdd = arrayList[0];
+      let indexOdd = 0;
+      for (let i = 0; i < arrayList.length; i++) {
+        if (arrayList[i] % 2 === 1 && minOdd > arrayList[i]) {
+          minOdd = arrayList[i];
+          indexOdd = i;
+        }
+      }
+      arrOdd.push(minOdd);
+      arrayList.splice(indexOdd, 1);
+    } else {
+      let maxEven = arrayList[0];
+      let indexEven = 0;
+      for (let i = 0; i < arrayList.length; i++) {
+        if (arrayList[i] % 2 === 0 && maxEven < arrayList[i]) {
+          maxEven = arrayList[i];
+          indexEven = i;
+        }
+      }
+      arrEven.push(maxEven);
+      arrayList.splice(indexEven, 1);
+    }
+  }
+  console.log(arrOdd);
+  console.log(arrEven);
+}
+bai79([9, 99, 3, 8, 2, 7, 13, 29, 5, 1, 10]);
+bai79([9, 3, 7, 5, 1]);
+
+function bai81(arrayListA, arrayListB) {
+  for (let i = 0; i < arrayListA.length; i++) {
+    for (let j = i + 1; j < arrayListA.length; j++) {
+      let temp;
+      if (arrayListA[i] > arrayListA[j]) {
+        temp = arrayListA[i];
+        arrayListA[i] = arrayListA[j];
+        arrayListA[j] = temp;
+      }
+    }
+  }
+  for (let i = 0; i < arrayListB.length; i++) {
+    for (let j = i + 1; j < arrayListB.length; j++) {
+      let temp;
+      if (arrayListB[i] > arrayListB[j]) {
+        temp = arrayListB[i];
+        arrayListB[i] = arrayListB[j];
+        arrayListB[j] = temp;
+      }
+    }
+  }
+  console.log(arrayListA);
+  console.log(arrayListB);
+  const arrayListC = arrayListA.concat(arrayListB).sort();
+  console.log(arrayListC);
+}
+bai81([9, 1, 2, 7, 3, 6, 8], [5, 8, 4, 2, 8, 5, 0]);
+
+function bai84(arrayList) {
+  // return arrayList.reverse()
+  let temp;
+  for (let i = 0; i < Math.trunc(arrayList.length / 2); i++) {
+    temp = arrayList[i];
+    arrayList[i] = arrayList[arrayList.length - 1 - i];
+    arrayList[arrayList.length - 1 - i] = temp;
+  }
+  let countUnder = 0;
+  let countOver = 0;
+  for (let i = 0; i < arrayList.length; i++) {
+    if (arrayList[i] > arrayList[i + 1]) countUnder++;
+    if (arrayList[i] < arrayList[i + 1]) countOver++;
+  }
+  return countUnder === arrayList.length - 1 || countOver === arrayList.length - 1;
+}
+console.log(bai84([3, 4, 5, 2, 0, 4]));
+console.log(bai84([1, 2, 3, 4, 5]));
+console.log(bai84([5, 4, 3, 2, 1]));
+
+function bai85(arrayList) {
+  for (let i = 0; i < arrayList.length / 2; i++) {
+    if (arrayList[i] !== arrayList[arrayList.length - 1 - i]) return false;
+  }
+  return true;
+}
+console.log(bai85([1, 2, 3, 5, 3, 2, 1]));
+console.log(bai85([1, 2, 3, 5, 3, 2, 2]));
+
+function bai87(arrayList, k) {
+  const length = arrayList.length;
+  while (k !== 0) {
+    for (let j = arrayList.length - 1; j >= 0; j--) {
+      arrayList[j + 1] = arrayList[j];
+    }
+    arrayList[0] = arrayList[arrayList.length - 1];
+    arrayList.length--;
+    k--;
+  }
+  return arrayList;
+}
+console.log(bai87([5, 7, 2, 3, 1, 9], 5));
