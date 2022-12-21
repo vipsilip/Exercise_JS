@@ -176,10 +176,9 @@ console.log(bai18('abcdcba'));
 console.log(bai18('abcdcbe'));
 
 function bai19(str) {
-  let number = false;
+  let number = '';
   for (let i = 0; i < str.length; i++) {
     if (str[i] >= 0 && str[i] <= 9) {
-      number = '';
       number += str[i];
     }
   }
@@ -187,3 +186,40 @@ function bai19(str) {
 }
 console.log(bai19('ac123'));
 console.log(bai19('acdjkgel'));
+
+function bai20(str,charNeedDel){
+    for(let i=0;i<str.length;i++){
+        if(str[i]===charNeedDel){
+            str=str.replace(charNeedDel,'')
+        }
+    }
+    return str;
+}
+console.log(bai20('abcdabckd','k'));
+
+function bai21(str){
+    let count=1;
+    let max;
+    let result;
+    for(let i=0;i<str.length;i++){
+        for(let j=i+1;j<str.length;j++){
+            if(str[i]===str[j]){
+                count++;
+                max=count;
+                result=str[i];
+            }
+        }
+    }
+    return result;
+}
+console.log(bai21('abcbjbalbaabb'));
+
+function bai22(str,del){
+    const arrStr=str.split(' ')
+    for(let i=0;i<arrStr.length;i++){
+        if(arrStr[i]===del) arrStr.splice(i,1)
+    }
+    return arrStr.join(' ') 
+}
+console.log(bai22('CAO DANG CNTT','CNTT'));
+console.log(bai22('CAO DANG CNTT','DANG'));
