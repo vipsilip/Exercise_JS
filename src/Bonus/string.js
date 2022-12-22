@@ -187,3 +187,94 @@ function bai19(str) {
 }
 console.log(bai19('ac123'));
 console.log(bai19('acdjkgel'));
+
+function bai23(str) {
+  const arrStr = str.split(' ');
+  for (let i = 0; i < arrStr.length; i++) {
+    const firstChar = arrStr[i][0].toUpperCase();
+    const restChar = arrStr[i].slice(1).toLowerCase();
+    arrStr[i] = firstChar + restChar;
+  }
+  return arrStr.join(' ');
+}
+console.log(bai23('nGuYen vAN a'));
+
+function bai24(str) {
+  const arrStr = str.split(' ').reverse();
+  return arrStr.join(' ');
+}
+console.log(bai24('truong CD CNTT TPHCM'));
+
+function bai25(str) {
+  const arrStr = str.split('');
+  const temp = [];
+  for (let i = 0; i < arrStr.length; i++) {
+    let count = 1;
+    for (let j = i + 1; j < arrStr.length; j++) {
+      if (arrStr[i] === arrStr[j]) {
+        count++;
+        for (let k = j; k < arrStr.length; k++) {
+          arrStr[k] = arrStr[k + 1];
+        }
+        j--;
+        arrStr.length--;
+      }
+    }
+    temp.push(count);
+  }
+  for (let i = 0; i < arrStr.length; i++) {
+    console.log(`ky tu ${arrStr[i]} xuat hien ${temp[i]} lan`);
+  }
+}
+bai25('ABCKCNABPABBA');
+bai25('aabckglabbnmbc');
+
+function bai26(str1, str2) {
+  let count = 0;
+  const arrStr1 = str1.split('');
+  const arrStr2 = str2.split('');
+
+  for (let i = 0; i < arrStr1.length; i++) {
+    for (let j = i + 1; j < arrStr1.length; j++) {
+      if (arrStr1[i] === arrStr1[j]) {
+        for (let k = j; k < arrStr1.length; k++) {
+          arrStr1[k] = arrStr1[k + 1];
+        }
+        arrStr1.length--;
+        j--;
+      }
+    }
+  }
+  for (let i = 0; i < arrStr2.length; i++) {
+    for (let j = i + 1; j < arrStr2.length; j++) {
+      if (arrStr2[i] === arrStr2[j]) {
+        for (let k = j; k < arrStr2.length; k++) {
+          arrStr2[k] = arrStr2[k + 1];
+        }
+        arrStr2.length--;
+        j--;
+      }
+    }
+  }
+  for (let i = 0; i < arrStr1.length; i++) {
+    for (let j = 0; j < arrStr2.length; j++) {
+      if (arrStr2[j] === arrStr1[i]) count++;
+    }
+  }
+  return `2 chuoi co ${count} ky tu giong nhau`;
+}
+console.log(bai26('THANHHAI', 'ABCHIJ'));
+
+function bai28(str, char, index) {
+  const arrStr = str.split('');
+  arrStr.splice(index, 0, char);
+  return arrStr.join('');
+}
+console.log(bai28('0123456', 'A', 4));
+console.log(bai28('le nguyen thanh hai', 'A', 4));
+
+function bai29(str) {
+  const arrStr = str.split(' ').filter((x) => !['', ',', ':', '.', '?', '!', ';'].includes(x));
+  return arrStr.length;
+}
+console.log(bai29('cong    hoa , xa hoi : chu ; nghia ! viet ? nam .'));
