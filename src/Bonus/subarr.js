@@ -361,3 +361,41 @@ console.log(
     [2, 4, 9],
   ])
 );
+
+function bai59(arr, del) {
+  for (let i = 0; i < arr.length; i++) {
+    if (del === i) arr.splice(del, 1);
+  }
+  return arr;
+}
+console.log(
+  bai59(
+    [
+      [5, 6, 3],
+      [1, 8, 7],
+      [2, 4, 9],
+    ],
+    1
+  )
+);
+
+function bai60(arr, del) {
+  const rowLength = arr.length;
+  const colLength = arr[0].length;
+  for (let i = 0; i < colLength; i++) {
+    for (let j = 0; j < rowLength; j++) {
+      if (del === j) arr[i].splice(del, 1);
+    }
+  }
+  return arr;
+}
+console.log(
+  bai60(
+    [
+      [5, 6, 3],
+      [1, 8, 7],
+      [2, 4, 9],
+    ],
+    1
+  )
+);
